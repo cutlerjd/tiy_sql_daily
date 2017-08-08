@@ -1,4 +1,5 @@
-SELECT * FROM movies.movies;
+SELECT *
+FROM movies.movies;
 
 SELECT title, movieid 
 FROM movies.movies
@@ -12,7 +13,7 @@ SELECT movieid
 FROM movies.movies
 WHERE title LIKE 'Made in America%';
 
-SELECT *
+SELECT *, multiurldecode(title)
 FROM movies.movies
 ORDER BY title
 LIMIT 10;
@@ -21,7 +22,7 @@ SELECT *
 FROM movies.movies
 WHERE title LIKE '%(2002)';
 
-SELECT *
+SELECT REGEXP_SUBSTR(title,'\((\\d{4})\)') AS 'YEAR'
 FROM movies.movies
 WHERE title LIKE 'Godfather, The%';
 
@@ -39,5 +40,4 @@ WHERE genres LIKE '%Comedy%' AND title LIKE '%Death%';
 
 SELECT *
 FROM movies.movies
-WHERE (title LIKE '%(2001)' OR title LIKE '%(2002)') AND title LIKE '%super%'
-
+WHERE (title LIKE '%(2001)' OR title LIKE '%(2002)') AND title LIKE '%super%';
