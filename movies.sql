@@ -1,5 +1,6 @@
 SELECT *
-FROM movies.movies;
+FROM movies.movies
+JOIN links ON movies.movieid=links.movieid;
 
 SELECT title, movieid 
 FROM movies.movies
@@ -13,7 +14,7 @@ SELECT movieid
 FROM movies.movies
 WHERE title LIKE 'Made in America%';
 
-SELECT *, multiurldecode(title)
+SELECT *
 FROM movies.movies
 ORDER BY title
 LIMIT 10;
@@ -41,3 +42,9 @@ WHERE genres LIKE '%Comedy%' AND title LIKE '%Death%';
 SELECT *
 FROM movies.movies
 WHERE (title LIKE '%(2001)' OR title LIKE '%(2002)') AND title LIKE '%super%';
+
+SELECT *, CONCAT("https://www.themoviedb.org/movie/",tmdbid) AS TMBID_URL,  CONCAT("http://www.imdb.com/title/tt",imdbid,"/") AS IMDBID_URL
+FROM movies.movies
+JOIN links ON movies.movieid=links.movieid;
+
+SELECT userid, movieid, id, timestamp, LCASE(REPLACE(tag," ","-")) AS tag FROM movies.tags;
